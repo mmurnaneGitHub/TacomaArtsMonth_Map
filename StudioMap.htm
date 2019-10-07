@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+    
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9,IE=10">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />--> 
+    
+    <title>Tacoma Studio Tour</title> 
+    <link rel="shortcut icon" href="images/Logo/TAM_LogoBlack_16x16px.jpg?v=20170807">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/image/resources/Lightbox.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/layout/resources/ExpandoPane.css" media="screen">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dijit/themes/tundra/tundra.css" media="screen">
+
+    <!--Additional  -->
+    <script type="text/javascript" src="js/findAndReplaceDOMText.js"></script>
+
+    <!--Dojo-->
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+
+    <!--Google Maps-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPoaOE5Rhl1zF-w8kXaJ0taaDSvdi1L44" type="text/javascript"></script>
+    <!--Additional -->
+    <script type="text/javascript" src="js/StudioMap_org.js?v=20190824"></script>
+
+    
+  </head>
+    
+<body class="tundra"> 
+		  <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'sidebar', gutters:true, liveSplitters:false" id="borderContainer">
+
+        <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="splitter:false, region:'center'" id="theMap">
+          <div id="map_canvas"><!--MAP--></div>
+        </div>
+
+      <div id="myExpando" data-dojo-type="dojox/layout/ExpandoPane" data-dojo-props="title: 'Create Itinerary', maxWidth:295, splitter:false, region:'right', startExpanded:false">
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:false, region:'right'" id="rightPane">
+  				<div dojoType="dijit/layout/TabContainer" attachParent="true" tabPosition="top" tabStrip="true" id="rightTabs">
+
+  					<!--Studios ................................................. -->
+  					<div dojoType="dijit/layout/ContentPane" title="Studios" attachParent="true" id="StudiosTab">
+  					 <div id="Studios1"><!--Studios...thumbnails here...--></div>
+  					</div>
+
+  					<div dojoType="dijit/layout/ContentPane" title="Itinerary" id="ItineraryTab"  attachParent="true">
+                
+            		<div id="theItinerary1"><!--Instructions--></div>
+
+            		<div id="theItinerary2"><!--<i>No Studios selected.</i>--></div>
+                
+                <div id="theItinerary3">
+                   <i>Last Studio becomes final destination.<br>Optional: Drag Studios into desired order.</i><br>
+                   <button id="buttonDelete" type="button"></button>
+                   <button id="buttonRemove" type="button"></button>
+                   <br>&nbsp;
+                </div>
+
+                <div id="theItinerary4">
+                   <center><input type="radio" id="optimize" name="optimize"/> Optimize
+                   <input type="radio" id="currentOrder" name="optimize" CHECKED /> Use current order
+                   <br><button id="buttonDirections" type="button"></button></center>
+                </div>
+
+  					</div>
+  
+  					<!--Directions ................................................. -->
+  					<div dojoType="dijit/layout/ContentPane" title="Directions" attachParent="true" id="DirectionsTab">
+  					 <div id="directions1"><!--Print Directions--></div>
+  					 <div id="directions2"><!--<a href="javascript:togglePane('rightPane','rightTabs','ItineraryTab');">Modify Itinerary</a>--></div>
+             <br>&nbsp;
+             <div id="directionsPanel"><!--Google directions--></div>
+  					</div>
+  
+  				</div> <!--rightTabs-->
+   			 </div> <!--rightPane-->
+        </div> <!--expando-->
+
+    </div> <!--container-->
+
+		<!--Welcome Popup-->
+        <div id="mapWelcome" dojoType="dijit/Dialog" title="Tacoma Studio Tour Map" style="text-align:center;">
+          <div  style="text-align:center; max-width: 400px; overflow: auto;">
+            Click on any map marker or artwork image to find detailed information about each of the 96 artists on the Tacoma Studio Tour. Plot your custom tour course using the Create Itinerary function.
+           
+             <br><button dojoType="dijit/form/Button" type="button" onClick="dijit.byId('mapWelcome').hide();dijit.byId('myExpando').toggle();">Begin</button><br>
+
+            <b>Feedback/Comments:</b> <br>We appreciate any input on improving this site. Please e-mail <a href="mailto:nstrom-avila@cityoftacoma.org?subject=Tacoma Studio Tour Map">us</a>
+          </div>              
+        </div>
+
+		<!--Wheelchair Popup-->
+        <div id="iconWheelchair" dojoType="dijit/Dialog" title="Legend" style="text-align:center;">
+          <div  style="text-align:center; max-width: 400px; overflow: auto;">
+            <img src="images/Logo/Wheelchair.jpg" title="wheelchair accessible studio" style="width:20px;height:20px;margin:2px 5px 5px 0px;border:solid 1px #999;padding:2px;float: left;" align="top">wheelchair accessible studio
+          </div>              
+        </div>
+
+		<!--TAC Funded Popup-->
+        <div id="iconTACfunded" dojoType="dijit/Dialog" title="Legend" style="text-align:center;">
+          <div  style="text-align:center; max-width: 400px; overflow: auto;">
+            <img src="images/Logo/TACfunded.jpg" title="artist funded by Tacoma Arts Commission in 2016" style="width:20px;height:20px;margin:2px 5px 5px 0px;border:solid 1px #999;padding:2px;float: left;" align="top">artist funded by Tacoma Arts Commission in 2019
+          </div>              
+        </div>
+
+		<!--GTCF Funded Popup-->
+        <div id="iconGTCF" dojoType="dijit/Dialog" title="Legend" style="text-align:center;">
+          <div  style="text-align:center; max-width: 400px; overflow: auto;">
+            <img src="images/Logo/GTCF.jpg" title="artist nominated for Greater Tacoma Community Foundation's Foundation of Art Award" style="width:20px;height:20px;margin:2px 5px 5px 0px;border:solid 1px #999;padding:2px;float: left;" align="top">artist nominated for Greater Tacoma Community Foundation's Foundation of Art Award
+          </div>              
+        </div>
+			
+</body>
+
+</html>
